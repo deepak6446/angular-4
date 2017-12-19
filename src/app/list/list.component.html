@@ -1,0 +1,8 @@
+<h2>{{title}}</h2>
+<ul *ngFor = "let data of list">
+	<li appBold>
+		{{data}}
+	</li>
+</ul>
+<input [(ngModel)]="user">  {{user}}
+<button (click)="onSelect()">Submit</button>
