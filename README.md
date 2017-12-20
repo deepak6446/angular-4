@@ -31,3 +31,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # ng build ( ng build compiles the application into an output directory)
 # add static files as app.use(favicon(path.join(__dirname, 'dist', 'favicon.ico')));
+
+## steps to run :
+### clone this repo 
+### ng build --watch     //watches any changes in angular app folder and build automaticaly if there are any changes
+### node app.js

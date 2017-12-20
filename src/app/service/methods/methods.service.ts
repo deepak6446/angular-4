@@ -7,9 +7,7 @@ export class MethodsService {
 	constructor(private _http: Http) { }
 
 	getMethod(){
-		return this._http.get("/api/users", function(err, data){
-			console.log("------->", err, data)
-		})
+		return this._http.get("/api/users")
 	}
 
 

@@ -10,7 +10,9 @@ export class LoginPageComponent implements OnInit {
 	user : Object  = {}
   	constructor(private _methodsService: MethodsService) { 
   		this._methodsService.getMethod()
-  		.subscribe(res => console.log("_________ res", res));
+  		.subscribe(res => { 
+         console.log("_________ res", res.json())
+      });
   	}
 
   	ngOnInit() {

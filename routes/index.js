@@ -12,6 +12,6 @@ router.get('/api/users', function (req, res, next) {
 
 router.get('/*', function (req, res, next) {
 	console.log("any")
-    res.sendFile(path.resolve('/index.html'));
+    res.sendFile(path.resolve('dist/index.html'));
 });
 module.exports = router;
