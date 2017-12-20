@@ -26,3 +26,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 # angular-4
+
+## running with node.js
+
+# ng build ( ng build compiles the application into an output directory)
+# add static files as app.use(favicon(path.join(__dirname, 'dist', 'favicon.ico')));

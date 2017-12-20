@@ -1,0 +1,7 @@
+.loginForm{
+    margin-top: 29px;
+    border: 1px outset;
+    padding: 55px;
+    border-right: 3px solid lightgray;
+    border-bottom: 3px solid lightgray;
+}
