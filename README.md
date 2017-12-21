@@ -28,29 +28,28 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # angular-4
 
 ## running with node.js
+1) ng build ( ng build compiles the application into an output directory)
+2) add static files as app.use(favicon(path.join(__dirname, 'dist', 'favicon.ico')));
 
-# ng build ( ng build compiles the application into an output directory)
-# add static files as app.use(favicon(path.join(__dirname, 'dist', 'favicon.ico')));
-
-# steps to run :
-## clone this repo 
-## ng build --watch     //watches any changes in angular app folder and build automaticaly if there are any changes
-## node app.js
+## steps to run :
+1) clone this repo 
+2) ng build --watch     //watches any changes in angular app folder and build automaticaly if there are any changes
+3) node app.js
 
 
-# Replication
-## Replication is the process of synchronizing data across multiple servers. Replication provides redundancy and increases data availability with multiple copies of data on different database servers.
+## Replication
+### Replication is the process of synchronizing data across multiple servers. Replication provides redundancy and increases data availability with multiple copies of data on different database servers.
 
-### Shutdown already running MongoDB server.
-### run primary node on port 27017 and create a replica set rs0 (/var/lib/mongodb/ --> db path where your db will be stored) : #### mongod --replSet rs0 --logpath s0-r0.log --dbpath /var/lib/mongodb/ --port 27017 --fork --smallfiles
-### It will start a mongod instance with the name rs0, on port 27017.
-### in cmd type mongo and following command's 
-### rs.initiate() to initiate a new replica set.
-### To check the replica set configuration, issue the command rs.conf()
-### To check the status of replica set issue the command rs.status()
-### before adding new member to replica set run the second node on port 37017 using cmd :  mongod --replSet rs0 --logpath s1-r1.log --dbpath /var/lib/mongodb/newMongo/ --port 37017 --fork --smallfiles
-### (continue on primary node to add replica set) rs.add("192.168.85.118:37017")
-### To check whether you are connected to primary or not : db.isMaster()
-### You have to set "slave okay" mode to let the mongo shell know that you're allowing reads from a secondary. This is to protect you and your applications from performing eventually consistent reads by accident. You can do this in the shell with: rs.slaveOk()
+1) Shutdown already running MongoDB server.
+2) run primary node on port 27017 and create a replica set rs0 using command : mongod --replSet rs0 --logpath s0-r0.log --dbpath /var/lib/mongodb/ --port 27017 --fork --smallfiles
+It will start a mongod instance with the name rs0, on port 27017.(/var/lib/mongodb/ --> db path where your db will be stored) 
+3) In cmd type mongo and following command's 
+4) rs.initiate() to initiate a new replica set.
+5) To check the replica set configuration, issue the command rs.conf()
+6) To check the status of replica set issue the command rs.status()
+7) before adding new member to replica set run the second node on port 37017 using cmd :  mongod --replSet rs0 --logpath s1-r1.log --dbpath /var/lib/mongodb/newMongo/ --port 37017 --fork --smallfiles
+8) (continue on primary node to add replica set) rs.add("192.168.85.118:37017")
+9) To check whether you are connected to primary or not : db.isMaster()
+10) You have to set "slave okay" mode to let the mongo shell know that you're allowing reads from a secondary. This is to protect you and your applications from performing eventually consistent reads by accident. You can do this in the shell with: rs.slaveOk()
 
 
