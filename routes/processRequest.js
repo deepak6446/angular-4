@@ -1,8 +1,14 @@
-const User 	= require('../models/users.js')
-const Q 	= require('q')
-const crypto = require('crypto');
-const algorithm = 'aes-256-ctr', password = 'foodappsjdjsdvvkjjjoksdfcjksdf';
-module.exports = {
+const User 			= require('../models/users.js')
+const setting 		= require('../config/setting')
+const Q 			= require('q')
+const crypto 		= require('crypto');
+const elasticsearch	= require('elasticsearch');
+
+const algorithm 	= setting.algorithm, 
+	  password 		= setting.password,
+	  client		= setting.client 	
+
+module.exports 	= {
 
 	login: async (req, res) => {
 	    
@@ -92,7 +98,89 @@ module.exports = {
 
 	},
 
+	searchRecipe : (req, res) => {
+	    // var username = req.session.username || req.body.username;
+	   	
+	   	client.cluster.health({}, (err,resp,status) => {  
+	   	  if ( status == 200) {
+	    	console.log('-seession-----------------', req.body)
+	   	  	
+	   	  	//Create or update a document. 
+	   	  	client.index({
+	   	  	  
+	   	  	  index: 'searchindex',
+	   	  	  type: 'searchStrings',
+	   	  	  body: {
+	   	  	  	term: req.body.srch,
+	   	  	    title: req.body.srch,
+	   	  	    // tags: ['y', 'z'],
+	   	  	    published: true,
+	   	  	  }
+	   	  	  
+
+	   	  	}, (error, response) => {
+	   	  		
+			    res.json({status: true});
+			    res.end();
+	   	  		console.log("create.index", error, response)
+
+	   	  	});
+	   	  }else {
+	   	  	res.json({status: false});
+	   	  	res.end();
+	   	  }
+	   	});
+
+
+	},
+
+	searchChange : (req, res) => {
+	    // var username = req.session.username || req.body.username;
+	   	
+	   	client.cluster.health({}, (err,resp,status) => {  
+	   	  if ( status == 200) {
+	    	console.log('-searchChange-----------------', req.body.srch)
+	   	  	
+	   	  	client.msearch({
+	   	  	  body: [
+	   	  	    // query_string query, on index/mytype
+	   	  	    { index: 'searchindex', type: 'searchStrings' },
+	   	  	    { query: { match: { body : req.body.srch} } }
+	   	  	  ]
+	   	  	},  (error, response) => {
+	   	  		
+			    res.json({status: true});
+			    res.end();
+	   	  		console.log("create.search", error, JSON.stringify(response))
+
+	   	  	});
+	   	  }else {
+	   	  	res.json({status: false});
+	   	  	res.end();
+	   	  }
+	   	});
+
+
+	}
+
 }
+
+//delete all 
+// client.indices.delete({
+//     index: '_all'
+// }, function (error, response) {
+//   console.log("---------------sdfdf-----.>msearch of doc:", error)
+// });
+// client.msearch({body: [{},
+// 	   	  	      { query: { match_all: {} } },
+
+// 	   	  	      // query_string query, on index/mytype
+// 	   	  	      // { index: 'myindex', type: 'mytype' },
+// 	   	  	      // { query: { query_string: { query: '"Test 2"' } } }
+// 	   	  	    ]
+// 	   	  	  }, function (error, response) {
+// 	   	  	    console.log("--------------------.>msearch of doc:", error,  JSON.stringify(response.responses[0].hits.hits))
+// 	   	  	  });
 
 validateEmail = (email) => {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

@@ -53,4 +53,3 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ### To check whether you are connected to primary or not : db.isMaster()
 ### You have to set "slave okay" mode to let the mongo shell know that you're allowing reads from a secondary. This is to protect you and your applications from performing eventually consistent reads by accident. You can do this in the shell with: rs.slaveOk()
 
-

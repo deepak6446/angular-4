@@ -8,6 +8,8 @@ const processRequest 	= require('./processRequest')
 
 router.post('/login', processRequest.login)
 router.get('/user/session', processRequest.session)
+router.post('/api/searchRecipe', processRequest.searchRecipe)
+router.post('/api/searchChange', processRequest.searchChange)
 
 router.get('/*', (req, res, next) => {
 	console.log("any")
