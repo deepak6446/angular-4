@@ -6,9 +6,11 @@ export class MethodsService {
 
 	constructor(private _http: Http) { }
 
-	getMethod(){
-		return this._http.get("/api/users")
+	postMethod (url, params) {
+		return this._http.post(url, params)
 	}
 
-
+	getMethod (url) {
+		return this._http.get(url)
+	}
 }

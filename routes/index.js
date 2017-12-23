@@ -1,16 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const path = require('path');
+const express 			= require('express');
+const router 			= express.Router();
+const path 				= require('path');
+const processRequest 	= require('./processRequest') 
 
 
 /* GET home page. */
 
-router.get('/api/users', function (req, res, next) {
-    res.json({status:0});
-    res.end()
-});
+router.post('/login', processRequest.login)
+router.get('/user/session', processRequest.session)
 
-router.get('/*', function (req, res, next) {
+router.get('/*', (req, res, next) => {
 	console.log("any")
     res.sendFile(path.resolve('dist/index.html'));
 });

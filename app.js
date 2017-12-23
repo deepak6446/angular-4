@@ -1,15 +1,17 @@
-const express = require('express');
-const path = require('path');
-const favicon = require('serve-favicon');
-const morgan = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-
-const router = require('./routes/index');
-// const users = require('./routes/users');
-// const router = express.Router();
+const express       = require('express');
+      path          = require('path'),
+      favicon       = require('serve-favicon'),
+      morgan        = require('morgan'),
+      cookieParser  = require('cookie-parser'),
+      bodyParser    = require('body-parser'),
+      setting       = require('./config/setting'),
+      router        = require('./routes/index'),
+      session       = require('express-session');
 
 const app = express();
+global.user_sessions = {};
+
+app.use(session({ secret: 'foodappsecretkey00182889', cookie: { maxAge : 1000*60*60 }})) 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'dist'));
@@ -24,6 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/', router)
+
 app.get('*', function(req, res, next){
     if(req.url == 'error'){
         res.status(404);
@@ -32,16 +35,16 @@ app.get('*', function(req, res, next){
     else res.sendFile('index.html', {root: __dirname+'/src'})}
 )
 
-// app.use('/users', users);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-var port = 8088
+
+var port = process.env.port|| 8088
 app.listen(port,function(){ console.log("listening on "+port) });
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -52,6 +55,11 @@ app.use(function(err, req, res, next) {
   console.log("error in getting file : ----", err)
   res.status(err.status || 500);
   res.render('error');
+});
+
+//handle uncaughtException
+process.on('uncaughtException', function(e) {
+ console.log("uncaughtException: Node NOT Exiting..."+e);
 });
 
 module.exports = app;

@@ -6,12 +6,15 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';   //component
 import { FoodComponent } from './food/food.component';   //component
-import { SerService } from './service/service/ser.service';
-import { MethodsService } from './service/methods/methods.service';
 import { BoldDirective } from './directive/bold/bold.directive';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HttpModule } from '@angular/http';
+import { SerService } from './service/service/ser.service';
+import { MethodsService } from './service/methods/methods.service';
+import { AuthguardService} from './service/authguard/authguard.service';
+import { AuthService } from './service/auth/auth.service';
+
 
 @NgModule({    //decorator
   declarations: [
@@ -26,14 +29,14 @@ import { HttpModule } from '@angular/http';
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-    	{ path:'food', component : FoodComponent },
-      { path:'list', component : ListComponent },  
+    	{ path:'food', component : FoodComponent, canActivate: [AuthguardService] },
+      { path:'list/:id/:name', component : ListComponent, canActivate: [AuthguardService] },  
     	{ path:'login', component : LoginPageComponent },	
-    	{ path: '', redirectTo: 'login', pathMatch: 'full' },	
-    	{ path: '**', redirectTo: 'login'},	
+    	{ path: '', redirectTo: 'food', pathMatch: 'full', canActivate: [AuthguardService] },	
+    	{ path: '**', redirectTo: 'food', canActivate: [AuthguardService] },	
     ])
   ],
-  providers: [ SerService, MethodsService ],
+  providers: [ SerService, MethodsService, AuthguardService, AuthService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

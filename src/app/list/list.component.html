@@ -1,8 +1,51 @@
-<h2>{{title}}</h2>
+<!-- <h2>{{title}}</h2>
 <ul *ngFor = "let data of list">
 	<li appBold>
 		{{data}}
 	</li>
 </ul>
 <input [(ngModel)]="user">  {{user}}
-<button (click)="onSelect()">Submit</button>
+<button (click)="onSelect()">Submit</button> -->
+<div class="container">
+	<div class="row">
+			
+		<div class="col-lg-9 col-12" style="margin-bottom: 10px">
+			<img src="http://store4u.in/wp-content/uploads/2017/01/55cb2e197291b.jpg" class="img-fluid" style="min-width: 100%;height: 274px;" alt="Image not found">
+			<h2 style="margin: 11px 0;" class="label ingredients">Ingredients</h2>
+			<span style="bottom: 1px solid gray;"></span>
+			<div class="row">
+				<div class="col-md-6" *ngFor="let ing of ingredients">
+					{{ing}}<span class="glyphicon glyphicon-ok-circle"></span>
+				</div>
+			</div>
+		</div>  	
+		<div class="col-lg-3 col-12">
+			<div class="card sideNotify" style="width: 20rem;">
+			  <div class="card-header">
+			    Related Recipes
+			  </div>
+			  <ul class="list-group list-group-flush">
+			    <li class="list-group-item" *ngFor ="let d of related"> 
+			    	<img src="http://store4u.in/wp-content/uploads/2017/01/55cb2e197291b.jpg" alt="..." class="rounded float-left" style="width: 4rem;margin-right: 10px"><span class="card-text">Cras justo odio Cras justo</span><br><small class="text-muted">Last updated 3 mins ago</small>
+			    </li>
+			  </ul>
+			</div>
+			<div class="card sideNotify" style="width: 20rem;">
+			  <div class="card-header">
+			    Trending users
+			  </div>
+			  <ul class="list-group list-group-flush">
+			    <li class="list-group-item" *ngFor="let d of trendingUser"> 
+			    	<img src="/images/profile.jpg" alt="..." class="rounded float-left" style="width: 4rem;margin-right: 10px"><span class="card-text">Cras justo odio Cras justo</span><br><small class="text-muted">128 recipes uploaded</small>
+			    </li>
+			    <li class="list-group-item"> 
+			    	<img src="/images/profile.jpg" alt="..." class="rounded float-left" style="width: 4rem;margin-right: 10px"><span class="card-text">Cras justo odio Cras justo</span><br><small class="text-muted">128 recipes uploaded</small>
+			    </li>
+			    <li class="list-group-item"> 
+			    	<img src="/images/profile.jpg" alt="..." class="rounded float-left" style="width: 4rem;margin-right: 10px"><span class="card-text">Cras justo odio Cras justo</span><br><small class="text-muted">128 recipes uploaded</small>
+			    </li>
+			  </ul>
+			</div>	
+		</div>	
+	</div>
+</div>

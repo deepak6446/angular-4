@@ -1,5 +1,21 @@
-<ul *ngFor = "let f of foodList">
+<!-- <ul *ngFor = "let f of foodList">
 	<li>
 		{{f}}	
 	</li>
 </ul>
+ -->
+<div class="container">
+	<div class="row">
+	 	<div class="col-md-3 col-sm-12" *ngFor="let rec of recipe ">
+	 	    <div class="card">
+	 	      <img class="card-img-top" src="http://store4u.in/wp-content/uploads/2017/01/55cb2e197291b.jpg" alt="Card image cap">
+	 	      <div class="card-body">
+	 	        <h4 class="card-title">{{rec}}</h4>
+	 	        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	 	        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+	 	        <a [routerLink]="['/list', '12345', 'deepak']" class="btn btn-primary">Go somewhere</a>
+	 	      </div>
+	 	    </div>
+	 	</div>  		
+	</div>
+</div>
