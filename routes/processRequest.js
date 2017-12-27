@@ -57,6 +57,25 @@ module.exports 	= {
 
 	},
 
+	logout: async (req, res) => {
+	    
+	    var username = req.session.username
+	    
+	    try {
+		    if (username && user_sessions[username]) {
+		    	delete user_sessions[username]
+		    	req.session.destroy()
+	    	    res.json({status: true});
+	    	    res.end();	
+		    }
+	    } catch(e) {
+    	    console.log('Raise exception: '+e)
+    	    res.json({status: false, message: 'Something went wrong.'})
+    	    res.end();
+    	}
+
+	},
+
 	validate: (username, password) => {
 	    var deferred = Q.defer();
 	    try{

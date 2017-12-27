@@ -7,6 +7,7 @@ const processRequest 	= require('./processRequest')
 /* GET home page. */
 
 router.post('/login', processRequest.login)
+router.get('/api/logout', processRequest.logout)
 router.get('/user/session', processRequest.session)
 router.post('/api/searchRecipe', processRequest.searchRecipe)
 router.post('/api/searchChange', processRequest.searchChange)

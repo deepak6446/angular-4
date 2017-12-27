@@ -15,7 +15,6 @@ import { MethodsService } from './service/methods/methods.service';
 import { AuthguardService} from './service/authguard/authguard.service';
 import { AuthService } from './service/auth/auth.service';
 
-
 @NgModule({    //decorator
   declarations: [
     AppComponent,
@@ -36,7 +35,7 @@ import { AuthService } from './service/auth/auth.service';
     	{ path: '**', redirectTo: 'food', canActivate: [AuthguardService] },	
     ])
   ],
-  providers: [ SerService, MethodsService, AuthguardService, AuthService],
+  providers: [ SerService, MethodsService, AuthguardService, AuthService, LoginPageComponent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
