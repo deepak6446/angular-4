@@ -9,17 +9,34 @@
 <div class="container">
 	<div class="row">
 			
-		<div class="col-lg-9 col-12" style="margin-bottom: 10px">
-			<img src="http://store4u.in/wp-content/uploads/2017/01/55cb2e197291b.jpg" class="img-fluid" style="min-width: 100%;height: 274px;" alt="Image not found">
-			<h2 style="margin: 11px 0;" class="label ingredients">Ingredients</h2>
+		<div class="col-md-8 md-offset-1" style="margin-bottom: 10px">
+			<img [src]="recipeData.image" class="img-fluid" style="min-width: 100%" alt="Image not found">
 			<span style="bottom: 1px solid gray;"></span>
 			<div class="row">
-				<div class="col-md-6" *ngFor="let ing of ingredients">
-					{{ing}}<span class="glyphicon glyphicon-ok-circle"></span>
+				<div class="col-md-6">
+					<h2 style="margin: 11px 0;border-bottom: 1px solid rgba(0, 0, 0, 0.6);" class="label ingredients">Ingredients</h2>
+					<div class="container">
+						<div class="row" style="font-weight: 600;" *ngFor="let ing of recipeData.ingredients">
+							<div class="col-md-3">{{getKey(ing)}}</div><div class="col-md-9">{{getVal(ing)}}</div> 
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<h2 style="margin: 11px 0;border-bottom: 1px solid rgba(0, 0, 0, 0.6);" class="label ingredients">DIRECTIONS</h2>
+					<div class="container">
+						<div class="row" style="font-weight: 400;" [innerHtml]="recipeData.DIRECTIONS">
+						</div>
+					</div>
 				</div>
 			</div>
+			<div class="row">
+				<label>Comments</label><br>
+				<form (ngSubmit) = "addComments()">
+					<input type="text" name="comment" [(ngModel)] = "comment">
+				</form>
+			</div>
 		</div>  	
-		<div class="col-lg-3 col-12">
+		<div class="col-md-3">
 			<div class="card sideNotify" style="width: 20rem;">
 			  <div class="card-header">
 			    Related Recipes
@@ -30,7 +47,7 @@
 			    </li>
 			  </ul>
 			</div>
-			<div class="card sideNotify" style="width: 20rem;">
+			<div class="card sideNotify" style="width: 20rem;margin-top: 10px;">
 			  <div class="card-header">
 			    Trending users
 			  </div>

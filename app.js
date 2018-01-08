@@ -6,12 +6,22 @@ const express       = require('express');
       bodyParser    = require('body-parser'),
       setting       = require('./config/setting'),
       router        = require('./routes/index'),
-      session       = require('express-session');
+      session       = require('express-session'),
+      redis   = require("redis"),
+      redisStore = require('connect-redis')(session),
+      client  = redis.createClient();
+
 
 const app = express();
 global.user_sessions = {};
 
-app.use(session({ secret: 'foodappsecretkey00182889', cookie: { maxAge : 1000*60*60 }})) 
+// app.use(session({ secret: 'foodappsecretkey00182889', cookie: { maxAge : 1000*60*60 }})) 
+app.use(session({
+    secret: 'foodappsecretkey00182889',
+    // create new redis store.
+    store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  1000*60*60}),//inseconds
+    cookie: { maxAge : 1000*60*60 }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'dist'));
